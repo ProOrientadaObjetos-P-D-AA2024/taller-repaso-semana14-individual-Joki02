@@ -5,16 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 public class TestEstudiante {
     public static void main(String[] args) {
-        ArrayList<Estudiante> lstEst = new ArrayList<Estudiante>(List.of(
-                new Estudiante("Paul", (int) (Math.random()*10+0), (int) (Math.random()*10+0)), 
-                new Estudiante("Estafania", (int) (Math.random()*10+0), (int) (Math.random()*10+0)) ));
+        // Lista inicial de estudiantes con datos aleatorios
+        ArrayList<Estudiante> lstEst = new ArrayList<>(List.of(
+                new Estudiante(0, "Paul", Math.random() * 10, Math.random() * 10),
+                new Estudiante(0, "Estafania", Math.random() * 10, Math.random() * 10)
+        ));
+
         ProcesarEstudiantes procesarEstudiantes = new ProcesarEstudiantes(lstEst);
         procesarEstudiantes.calculoPromedios();
         procesarEstudiantes.calculoEstados();
-        for (Estudiante est : lstEst) 
+        for (Estudiante est : lstEst) {
             procesarEstudiantes.insertarEstudiante(est);
+        }
         ArrayList<Estudiante> lstEst2 = procesarEstudiantes.getLstEstudiantes();
-        for (Estudiante est : lstEst2) 
+        for (Estudiante est : lstEst2) {
             System.out.println(est);
+        }
     }
 }
