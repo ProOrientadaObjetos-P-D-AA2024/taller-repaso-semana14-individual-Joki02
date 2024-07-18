@@ -1,5 +1,4 @@
 package MODEL;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -8,10 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ConeccionDB {
-
     public Connection concDB;
     public String msj;
-
     public void setConcDB(String url) {
         try {
             this.concDB = DriverManager.getConnection(url);
@@ -25,7 +22,7 @@ public class ConeccionDB {
         try {
             setConcDB("jdbc:sqlite:bd/dbTest1.db");
             Statement statement = concDB.createStatement();
-            ResultSet resultSet = statement.executeQuery("select * from Estudiante");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Estudiante");
             while (resultSet.next()) {
                 lstEstudiantes.add(new Estudiante(
                         resultSet.getInt("id"),
@@ -47,9 +44,9 @@ public class ConeccionDB {
         try {
             setConcDB("jdbc:sqlite:bd/dbTest1.db");
             Statement statement = concDB.createStatement();
-            String strInsertEst = String.format("insert into Estudiante(nombreEst, nota1, nota2, promedio, estado) "
-                    + "values('%s', %f, %f, %f, '%s')",
-                    estudiante.nombreEst, estudiante.nota1, estudiante.nota2, estudiante.promedio, estudiante.estado);
+            String strInsertEst = String.format("INSERT INTO Estudiante(id, nombreEst, nota1, nota2, promedio, estado) "
+                    + "VALUES(%d, '%s', %f, %f, %f, '%s')",
+                    estudiante.id, estudiante.nombreEst, estudiante.nota1, estudiante.nota2, estudiante.promedio, estudiante.estado);
             statement.executeUpdate(strInsertEst);
             statement.close();
         } catch (SQLException sqlException) {
@@ -61,7 +58,7 @@ public class ConeccionDB {
         try {
             setConcDB("jdbc:sqlite:bd/dbTest1.db");
             Statement statement = concDB.createStatement();
-            String strUpdateEst = String.format("update Estudiante set nombreEst='%s', nota1=%f, nota2=%f, promedio=%f, estado='%s' where id=%d",
+            String strUpdateEst = String.format("UPDATE Estudiante SET nombreEst='%s', nota1=%f, nota2=%f, promedio=%f, estado='%s' WHERE id=%d",
                     estudiante.nombreEst, estudiante.nota1, estudiante.nota2, estudiante.promedio, estudiante.estado, estudiante.id);
             statement.executeUpdate(strUpdateEst);
             statement.close();
@@ -74,7 +71,7 @@ public class ConeccionDB {
         try {
             setConcDB("jdbc:sqlite:bd/dbTest1.db");
             Statement statement = concDB.createStatement();
-            String strDeleteEst = String.format("delete from Estudiante where id=%d", id);
+            String strDeleteEst = String.format("DELETE FROM Estudiante WHERE id=%d", id);
             statement.executeUpdate(strDeleteEst);
             statement.close();
         } catch (SQLException sqlException) {
@@ -82,3 +79,4 @@ public class ConeccionDB {
         }
     }
 }
+//para el delete copiar el mismo de insertar estudiante,se conecta a la msima bass de datos, lo que cambia es, 'DELETE FROM' + estudiantes + 'Where' + estudiante."id =" + estudiante.Id);

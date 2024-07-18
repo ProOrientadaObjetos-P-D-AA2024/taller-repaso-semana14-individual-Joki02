@@ -8,7 +8,7 @@ public class FormTestEstudiante extends javax.swing.JFrame {
     DefaultTableModel modelo;
 
     public FormTestEstudiante() {
-        initComponents(); // Llama al método generado automáticamente
+        initComponents();
         modelo = (DefaultTableModel) this.jTable1.getModel();
     }
 
@@ -49,11 +49,11 @@ public class FormTestEstudiante extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Nota1", "Nota2", "Promedio", "Estado"
+                "Nombre", "Nota1", "Nota2", "Promedio", "Estado", "id"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class
+                java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -97,8 +97,7 @@ public class FormTestEstudiante extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 */ 
-    
-private void initComponents() {
+    private void initComponents() {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -156,7 +155,7 @@ private void initComponents() {
             };
 
             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+                return types[columnIndex];
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -225,10 +224,10 @@ private void initComponents() {
         ProcesarEstudiantes procesarEstudiantes = new ProcesarEstudiantes(lstEst);
         procesarEstudiantes.insertarEstudiante(nuevoEstudiante);
 
-        jButton2ActionPerformed(evt); // Refresh the table
+        jButton2ActionPerformed(evt); 
     }        
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        int selectedRow = jTable1.getSelectedRow();
+         int selectedRow = jTable1.getSelectedRow();
         if (selectedRow >= 0) {
             int id = (int) modelo.getValueAt(selectedRow, 0);
             String nombre = JOptionPane.showInputDialog(this, "Nombre:", modelo.getValueAt(selectedRow, 1));
